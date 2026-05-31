@@ -1,118 +1,698 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrew Isra Saputra DB - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Isra Saputra DB | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0f172a', // Slate 900
+                        darker: '#020617', // Slate 950
+                        card: '#1e293b', // Slate 800
+                        primary: '#10b981', // Emerald 500
+                        primary_hover: '#059669', // Emerald 600
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981; 
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #10b981;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-  <!-- Navbar -->
-  <nav>
-    <div class="container nav-content">
-      <h1 class="logo">Andrew Isra Saputra<span>DB</span></h1>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-container">
-      <div class="hero-left">
-        <img src="img_Andrew.svg" alt="Andrew's Photo" class="profile-pic">
-      </div>
-      <div class="hero-right">
-        <h2>Hello, I'm</h2>
-        <h1>Andrew Isra Saputra DB</h1>
-        <p>Cybersecurity Enthusiast | Informatics Engineering Student at ITB</p>
-      </div>
-    </div>
-  </header>
+<body class="bg-dark text-slate-300 font-sans antialiased selection:bg-primary selection:text-white">
 
-  <main>
-    <!-- About -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Me</h2>
-        <p>
-          I'm a 5th-semester Informatics Engineering student at Institut Teknologi Bandung, Indonesia.
-          Passionate about cybersecurity, especially cryptography. I love exploring how systems can be protected — and sometimes broken — to make them safer.
-        </p>
-        <p>
-          In my spare time, I enjoy Capture The Flag (CTF) challenges and reading security blogs.
-          Currently seeking internships or projects to deepen my practical experience.
-        </p>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="section alt-bg">
-      <div class="container">
-        <h2>Skills & Tools</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Cybersecurity</h3>
-            <ul>
-              <li>Cryptography</li>
-              <li>Kali Linux, Wireshark</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Programming</h3>
-            <ul>
-              <li>Python, C, C++, C#, Haskell, Prolog, Java</li>
-              <li>JavaScript, HTML/CSS</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Technologies</h3>
-            <ul>
-              <li>Linux (Kali), Git & GitHub, Docker</li>
-              <li>Ghidra, Matlab, Cisco</li>
-              <li>Excel, Adobe Illustrator</li>
-            </ul>
-          </div>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-heading font-bold text-2xl text-white tracking-wider">ANDREW<span class="text-primary">.</span></a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-white hover:text-primary transition-colors font-medium">Home</a>
+                        <a href="#about" class="nav-link text-slate-300 hover:text-white transition-colors font-medium">About</a>
+                        <a href="#skills" class="nav-link text-slate-300 hover:text-white transition-colors font-medium">Skills</a>
+                        <a href="#experience" class="nav-link text-slate-300 hover:text-white transition-colors font-medium">Experience</a>
+                        <a href="#projects" class="nav-link text-slate-300 hover:text-white transition-colors font-medium">Projects</a>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>IFOS Learning Class Platform</h3>
-            <p><strong>Tech Stack:</strong> React, Flask, PostgreSQL, JWT</p>
-            <p><strong>Link:</strong> on progress development</p>
-          </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-card border-b border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-white font-medium hover:bg-slate-700 rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-slate-300 font-medium hover:bg-slate-700 hover:text-white rounded-md">About</a>
+                <a href="#skills" class="block px-3 py-2 text-slate-300 font-medium hover:bg-slate-700 hover:text-white rounded-md">Skills</a>
+                <a href="#experience" class="block px-3 py-2 text-slate-300 font-medium hover:bg-slate-700 hover:text-white rounded-md">Experience</a>
+                <a href="#projects" class="block px-3 py-2 text-slate-300 font-medium hover:bg-slate-700 hover:text-white rounded-md">Projects</a>
+            </div>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 overflow-hidden relative">
+        <!-- Background Decoration -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+            <!-- Text Content -->
+            <div class="w-full md:w-3/5 text-center md:text-left fade-in">
+                <p class="text-primary font-medium tracking-wide mb-2">Hello, I'm</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold text-white mb-4 leading-tight">
+                    Andrew Isra <br> Saputra DB
+                </h1>
+                <h2 class="text-xl sm:text-2xl text-slate-400 font-medium mb-6 h-8" id="typewriter-text">
+                    <!-- Typed dynamically by JS -->
+                </h2>
+                <p class="text-slate-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
+                    A passionate Informatics Engineering student at ITB, specializing in architecting scalable web applications, secure systems, and impactful technical solutions.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary_hover text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-primary/30 w-full sm:w-auto text-center">
+                        Contact Me
+                    </a>
+                    <a href="#projects" class="px-8 py-3 bg-transparent border border-slate-600 hover:border-primary hover:text-primary text-white font-medium rounded-lg transition-all duration-300 w-full sm:w-auto text-center">
+                        View Work
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-5 mt-10 justify-center md:justify-start">
+                    <a href="https://linkedin.com/in/andrew-isra-saputra-db" target="_blank" class="w-10 h-10 rounded-full bg-card flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-800 transition-all shadow-md">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/andrewisra" target="_blank" class="w-10 h-10 rounded-full bg-card flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-800 transition-all shadow-md">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:andrew.israsaputra@gmail.com" class="w-10 h-10 rounded-full bg-card flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-800 transition-all shadow-md">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Profile Image -->
+            <div class="w-full md:w-2/5 flex justify-center fade-in delay-200">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                    <!-- Decorative border/background -->
+                    <div class="absolute inset-0 border-2 border-primary rounded-full translate-x-4 translate-y-4 -z-10"></div>
+                    <img src="img_andrew.svg" alt="Andrew Isra Saputra DB" class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-dark object-top">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section alt-bg">
-      <div class="container">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:andrew.israsaputra@gmail.com">andrew.israsaputra@gmail.com</a> | 13523110@std.stei.itb.ac.id</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/andrewisra" target="_blank">andrewisra</a></p>
-        <p>GitHub: <a href="https://github.com/andrewisra" target="_blank">andrewisra</a></p>
-      </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-darker relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">About <span class="text-primary">Me</span></h2>
+                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-8 fade-in">
+                    <h3 class="text-2xl font-heading font-semibold text-white mb-4">Informatics Engineering Student at ITB</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed text-justify">
+                        I am a 3rd-year Informatics Engineering student at Institut Teknologi Bandung with a strong passion for Web Development, Software Engineering, and Software Security. I have a proven ability to architect scalable web applications, implement secure system designs, and lead impactful technical projects. 
+                    </p>
+                    <p class="text-slate-400 leading-relaxed text-justify">
+                        Complemented by strong communication skills and a continuous drive to build reliable and robust software solutions, I am always eager to learn new technologies and apply them to solve real-world problems efficiently.
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-4 fade-in delay-200">
+                    <div class="bg-card rounded-2xl p-6 shadow-xl border border-slate-700">
+                        <ul class="space-y-4">
+                            <li class="flex items-start border-b border-slate-700 pb-3">
+                                <span class="w-8 mt-1 text-primary"><i class="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <span class="block text-sm text-slate-500">Location</span>
+                                    <span class="text-white font-medium">Bandung, West Java, Indonesia</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start border-b border-slate-700 pb-3">
+                                <span class="w-8 mt-1 text-primary"><i class="fas fa-envelope"></i></span>
+                                <div>
+                                    <span class="block text-sm text-slate-500">Email</span>
+                                    <span class="text-white font-medium break-all">andrew.israsaputra@gmail.com</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start border-b border-slate-700 pb-3">
+                                <span class="w-8 mt-1 text-primary"><i class="fas fa-phone"></i></span>
+                                <div>
+                                    <span class="block text-sm text-slate-500">Phone</span>
+                                    <span class="text-white font-medium">+62 823-4622-2274</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="w-8 mt-1 text-primary"><i class="fas fa-graduation-cap"></i></span>
+                                <div>
+                                    <span class="block text-sm text-slate-500">Education</span>
+                                    <span class="text-white font-medium">Institut Teknologi Bandung (ITB)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Quote -->
-    <section class="quote">
-      <p>"Security is not a product, but a process" – Bruce Schneier</p>
-    </section>
-  </main>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Technical <span class="text-primary">Skills</span></h2>
+                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
 
-  <footer>
-    <p>&copy; 2025 Andrew Isra Saputra DB</p>
-  </footer>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="bg-card p-8 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors fade-in shadow-lg">
+                    <div class="w-14 h-14 bg-darker rounded-xl flex items-center justify-center text-primary text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-6">Programming Languages</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Python</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">C / C++</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Java</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">JS/TypeScript</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">SQL</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">PHP</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Go</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Haskell</span>
+                    </div>
+                </div>
+
+                <!-- Frameworks & Libraries -->
+                <div class="bg-card p-8 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors fade-in delay-100 shadow-lg">
+                    <div class="w-14 h-14 bg-darker rounded-xl flex items-center justify-center text-primary text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-6">Frameworks & Libraries</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">React.js</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Next.js</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Express.js</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Pandas</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Scikit-Learn</span>
+                    </div>
+                </div>
+
+                <!-- Tools & Platforms -->
+                <div class="bg-card p-8 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors fade-in delay-200 shadow-lg">
+                    <div class="w-14 h-14 bg-darker rounded-xl flex items-center justify-center text-primary text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-6">Tools & Platforms</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Git/GitHub</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Docker</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Linux</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Postman</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Matlab</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Latex</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700 hover:border-primary hover:text-primary transition-colors cursor-default">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="py-20 bg-darker relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Work Experience -->
+                <div>
+                    <div class="flex items-center gap-4 mb-12 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xl">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h2 class="text-3xl font-heading font-bold text-white">Experience</h2>
+                    </div>
+
+                    <div class="relative border-l-2 border-slate-700 ml-6 space-y-10 pb-4">
+                        <!-- Experience 1 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-primary text-sm font-medium tracking-wider mb-1 block">Dec 2025 - Jan 2026 | Remote</span>
+                            <h3 class="text-xl font-bold text-white">Freelance Full-Stack Developer</h3>
+                            <h4 class="text-slate-400 mb-4 font-medium">Yayasan Kampung Qur'an Jangkang</h4>
+                            <ul class="list-disc list-outside ml-4 space-y-2 text-slate-400 text-sm leading-relaxed">
+                                <li>Developed a comprehensive information system and company profile website using Next.js, Go (Gin), and SQLite.</li>
+                                <li>Built an administrative dashboard to streamline recording of student data, progress, and daily activities.</li>
+                                <li>Created a dynamic homepage featuring the foundation's profile and a CMS.</li>
+                                <li>Deployed the full-stack application on a Virtual Private Server (VPS) ensuring reliable access.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Experience 2 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-slate-500 rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-slate-400 text-sm font-medium tracking-wider mb-1 block">Oct 2023 - Feb 2024 | Remote</span>
+                            <h3 class="text-xl font-bold text-white">Freelance IT Staff</h3>
+                            <h4 class="text-slate-400 mb-4 font-medium">Geography Time I - UIN Suska Riau</h4>
+                            <ul class="list-disc list-outside ml-4 space-y-2 text-slate-400 text-sm leading-relaxed">
+                                <li>Configured and managed the online examination platform for the competition, ensuring a seamless testing experience.</li>
+                                <li>Provided technical support and maintained system stability to prevent disruptions during the examination.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Experience 3 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-slate-500 rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-slate-400 text-sm font-medium tracking-wider mb-1 block">Sept 2022 - Dec 2022 | Palopo, Indonesia</span>
+                            <h3 class="text-xl font-bold text-white">Economics Teacher</h3>
+                            <h4 class="text-slate-400 mb-4 font-medium">SMAN 3 Palopo</h4>
+                            <ul class="list-disc list-outside ml-4 space-y-2 text-slate-400 text-sm leading-relaxed">
+                                <li>Instructed high school students in Economics, specializing in Service Company Accounting.</li>
+                                <li>Facilitated interactive learning sessions and evaluated student comprehension through practical assessments.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Organizations -->
+                <div>
+                    <div class="flex items-center gap-4 mb-12 fade-in delay-100">
+                        <div class="w-12 h-12 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xl">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2 class="text-3xl font-heading font-bold text-white">Education & Org.</h2>
+                    </div>
+
+                    <div class="relative border-l-2 border-slate-700 ml-6 space-y-10 pb-4">
+                        <!-- Education 1 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-primary text-sm font-medium tracking-wider mb-1 block">Aug 2023 - Present | Bandung, Indonesia</span>
+                            <h3 class="text-xl font-bold text-white">Institut Teknologi Bandung (ITB)</h3>
+                            <h4 class="text-slate-400 mb-2 font-medium">Informatics Engineering (S1) | GPA: 3.xx/4.00</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-2">
+                                <strong>Coursework:</strong> Data Structures & Algorithms, OOP, Database Systems, Web Dev, Computer Networks, AI, OS, Parallel & Distributed System.
+                            </p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                <strong>Interest:</strong> Cryptography and Encryption System.
+                            </p>
+                        </div>
+
+                        <!-- Organization 1 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-blue-400 text-sm font-medium tracking-wider mb-1 block">Jan 2026 - Present | Indonesia</span>
+                            <h3 class="text-xl font-bold text-white">Project Officer</h3>
+                            <h4 class="text-slate-400 mb-2 font-medium">IFOS Foundation</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Directed planning and execution of a free online tutoring program for Eastern Indonesian students preparing for university entrance exams.
+                            </p>
+                        </div>
+
+                        <!-- Organization 2 -->
+                        <div class="relative pl-8 fade-in">
+                            <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1.5 border-4 border-darker"></div>
+                            <span class="text-blue-400 text-sm font-medium tracking-wider mb-1 block">Aug 2024 - Mar 2026 | Bandung, Indonesia</span>
+                            <h3 class="text-xl font-bold text-white">Head of External Relations / Intracampus Staff</h3>
+                            <h4 class="text-slate-400 mb-2 font-medium">Himpunan Mahasiswa Informatika (HMIF) ITB</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Facilitated communication and organized internal events to foster engagement among Informatics Engineering students.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Featured <span class="text-primary">Projects</span></h2>
+                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="bg-card rounded-2xl overflow-hidden border border-slate-700 hover:border-primary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 group fade-in flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-primary text-3xl"><i class="fas fa-shopping-cart"></i></div>
+                            <span class="text-xs font-semibold bg-primary/20 text-primary px-3 py-1 rounded-full">Oct - Dec 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Nimonspedia E-Commerce</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-4">
+                            Comprehensive full-stack marketplace application featuring role-based access control. Engineered a dual-backend architecture utilizing PHP for core REST APIs and Node.js for asynchronous events.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Node.js</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">PHP</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">PostgreSQL</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Docker</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-700 bg-slate-800/50">
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fab fa-github"></i> View Repository
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-card rounded-2xl overflow-hidden border border-slate-700 hover:border-primary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 group fade-in delay-100 flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-primary text-3xl"><i class="fas fa-brain"></i></div>
+                            <span class="text-xs font-semibold bg-primary/20 text-primary px-3 py-1 rounded-full">Nov 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">ML Algorithms From Scratch</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-4">
+                            Engineered FFNN and Logistic Regression models without relying on high-level frameworks. Programmed core math operations including forward/back propagation and gradient descent.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Python</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">NumPy</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Pandas</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-700 bg-slate-800/50 flex gap-4">
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fab fa-github"></i> LR Repo
+                        </a>
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fab fa-github"></i> FFNN Repo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-card rounded-2xl overflow-hidden border border-slate-700 hover:border-primary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 group fade-in delay-200 flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-primary text-3xl"><i class="fas fa-music"></i></div>
+                            <span class="text-xs font-semibold bg-primary/20 text-primary px-3 py-1 rounded-full">Nov 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Image & Music Retrieval</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-4">
+                            Built a web app to retrieve songs/album images from user queries (humming or visual input). Applied audio feature extraction, cosine similarity, and PCA for efficient similarity search.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Python Flask</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Next.js</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">PCA</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-700 bg-slate-800/50">
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fas fa-external-link-alt"></i> View Report
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-card rounded-2xl overflow-hidden border border-slate-700 hover:border-primary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 group fade-in flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-primary text-3xl"><i class="fas fa-gamepad"></i></div>
+                            <span class="text-xs font-semibold bg-primary/20 text-primary px-3 py-1 rounded-full">Mar 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Purry Leveling - RPG System</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-4">
+                            Developed a turn-based dungeon RPG using OOP principles in C++. Designed architecture including Character, Mob, Skill, Item, and Dungeon systems with inheritance and polymorphism.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">C++ (OOP)</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">STL</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">CLI</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-700 bg-slate-800/50">
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fab fa-github"></i> View Repository
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="bg-card rounded-2xl overflow-hidden border border-slate-700 hover:border-primary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 group fade-in delay-100 flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-primary text-3xl"><i class="fas fa-calendar-alt"></i></div>
+                            <span class="text-xs font-semibold bg-primary/20 text-primary px-3 py-1 rounded-full">Oct 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Class Scheduling Algorithm</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-4">
+                            Developed scheduling algorithms from scratch to solve class timetabling constraints. Implemented Hill Climbing, Simulated Annealing, and Genetic Algorithm for optimization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Python</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Local Search</span>
+                            <span class="text-xs bg-dark text-slate-300 px-2 py-1 rounded">Genetics</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-700 bg-slate-800/50">
+                        <a href="#" class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-2">
+                            <i class="fab fa-github"></i> View Repository
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="py-20 bg-darker relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Awards & <span class="text-primary">Achievements</span></h2>
+                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-6">
+                <!-- Award 1 -->
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 flex flex-col sm:flex-row gap-6 items-start fade-in">
+                    <div class="w-14 h-14 shrink-0 bg-yellow-500/20 text-yellow-500 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Grant Recipient, PKM-RE 2025</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Secured national funding from the Ministry of Education for the research titled "Brain Wave Development Analysis Based on Hurst Exponent Using Electroencephalography: A Study through Cognitive Training Stimulus".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Award 2 -->
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 flex flex-col sm:flex-row gap-6 items-start fade-in delay-100">
+                    <div class="w-14 h-14 shrink-0 bg-slate-400/20 text-slate-300 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">3rd Place Winner, 9th NPLC (2022)</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Recognized for excellence in algorithmic problem-solving and programming logic in the National Programming & Logic Competition organized by Universitas Ciputra.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-dark border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <h2 class="text-2xl font-heading font-bold text-white mb-6">Let's Connect</h2>
+            <p class="text-slate-400 text-center max-w-xl mb-8">
+                I'm currently open to new opportunities, collaborations, and interesting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <a href="mailto:andrew.israsaputra@gmail.com" class="px-8 py-3 bg-primary/10 border border-primary text-primary hover:bg-primary hover:text-white font-medium rounded-lg transition-all duration-300 mb-12">
+                Say Hello
+            </a>
+
+            <div class="flex gap-6 mb-8">
+                <a href="https://linkedin.com/in/andrew-isra-saputra-db" target="_blank" class="text-slate-400 hover:text-white transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/andrewisra" target="_blank" class="text-slate-400 hover:text-white transition-colors text-2xl"><i class="fab fa-github"></i></a>
+                <a href="mailto:andrew.israsaputra@gmail.com" class="text-slate-400 hover:text-white transition-colors text-2xl"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="w-full h-px bg-slate-800 mb-8"></div>
+            <p class="text-slate-500 text-sm">
+                &copy; 2026 Andrew Isra Saputra DB. Built with HTML, Tailwind CSS & JS.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('bg-dark/90', 'bg-dark/95');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('bg-dark/95', 'bg-dark/90');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Simple Typewriter Effect
+        const typeWriterText = document.getElementById('typewriter-text');
+        const phrases = [
+            "Software Engineer",
+            "Web Developer",
+            "Software Security Enthusiast",
+            "ITB Informatics Student"
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingDelay = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typeWriterText.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="border-r-2 border-primary animate-pulse">&nbsp;</span>';
+                charIndex--;
+                typingDelay = 50;
+            } else {
+                typeWriterText.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="border-r-2 border-primary animate-pulse">&nbsp;</span>';
+                charIndex++;
+                typingDelay = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typingDelay = 2000; // Pause at end of phrase
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingDelay = 500; // Pause before typing next phrase
+            }
+
+            setTimeout(type, typingDelay);
+        }
+
+        // Start typing effect on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(type, 1000);
+            
+            // Trigger initial visible state for hero section elements
+            setTimeout(() => {
+                document.querySelectorAll('#home .fade-in').forEach(el => el.classList.add('visible'));
+            }, 100);
+        });
+    </script>
 </body>
 </html>
